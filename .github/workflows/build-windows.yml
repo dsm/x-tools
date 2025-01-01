@@ -26,7 +26,7 @@ jobs:
           version: ${{ matrix.version }}
           target: desktop
           arch: win64_msvc2022_64
-          modules: 'qtcharts qtserialbus qtserialport qtwebsockets'
+          modules: 'qtcharts qtserialbus qtserialport qtwebsockets qtconnectivity'
       - name: build-msvc
         shell: cmd
         run: |
