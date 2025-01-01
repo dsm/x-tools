@@ -27,6 +27,7 @@ list(APPEND X_TOOLS_QT_COMPONENTS Core)
 list(APPEND X_TOOLS_QT_COMPONENTS Widgets)
 list(APPEND X_TOOLS_QT_COMPONENTS Network)
 list(APPEND X_TOOLS_QT_COMPONENTS LinguistTools)
+list(APPEND X_TOOLS_QT_COMPONENTS Bluetooth)
 
 # Qt6 is preferred, but Qt5 is also supported
 find_package(QT NAMES Qt6 QUIET COMPONENTS ${X_TOOLS_QT_COMPONENTS})
@@ -196,23 +197,8 @@ endif()
 # --------------------------------------------------------------------------------------------------
 # BLE
 option(X_TOOLS_ENABLE_MODULE_BLUETOOTH "Enable Bluetooth module" ON)
-find_package(Qt${QT_VERSION_MAJOR} QUIET COMPONENTS Bluetooth)
-if((NOT Qt${QT_VERSION_MAJOR}Bluetooth_FOUND) OR (QT_VERSION VERSION_LESS 6.5.0))
-  set(X_TOOLS_ENABLE_MODULE_BLUETOOTH OFF)
-endif()
-if(X_TOOLS_ENABLE_MODULE_BLUETOOTH)
-  add_compile_definitions(X_TOOLS_ENABLE_MODULE_BLUETOOTH)
-else()
-  message(STATUS "Bluetooth module is disable, bluetooth files will be removed.")
-  set(TMP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/source)
-  list(REMOVE_ITEM X_TOOLS_SOURCE ${TMP_DIR}/IO/Unit/BleScanner.h)
-  list(REMOVE_ITEM X_TOOLS_SOURCE ${TMP_DIR}/IO/Unit/BleScanner.cpp)
-  list(REMOVE_ITEM X_TOOLS_SOURCE ${TMP_DIR}/IO/IO/Communication/BleCentral.h)
-  list(REMOVE_ITEM X_TOOLS_SOURCE ${TMP_DIR}/IO/IO/Communication/BleCentral.cpp)
-  list(REMOVE_ITEM X_TOOLS_SOURCE ${TMP_DIR}/IO/UI/Communication/BleCentralUi.h)
-  list(REMOVE_ITEM X_TOOLS_SOURCE ${TMP_DIR}/IO/UI/Communication/BleCentralUi.ui)
-  list(REMOVE_ITEM X_TOOLS_SOURCE ${TMP_DIR}/IO/UI/Communication/BleCentralUi.cpp)
-endif()
+add_compile_definitions(X_TOOLS_ENABLE_MODULE_BLUETOOTH)
+
 
 # --------------------------------------------------------------------------------------------------
 # Qt SerialBus module
