@@ -11,7 +11,7 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   QT_VERSION: 6.8.*
-  QT_MODULES: 'qtcharts qtserialbus qtserialport qtwebsockets'
+  QT_MODULES: 'qtcharts qtserialbus qtserialport qtwebsockets qtconnectivity'
 jobs:
   update-tag:
     runs-on: ubuntu-latest
